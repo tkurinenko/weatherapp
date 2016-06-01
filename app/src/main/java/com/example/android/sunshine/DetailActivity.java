@@ -17,7 +17,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 public class DetailActivity extends AppCompatActivity {
-    public final String LOG_TAG = DetailActivity.class.getSimpleName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +31,6 @@ public class DetailActivity extends AppCompatActivity {
                     .commit();}
     }
 
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_detail, menu);
@@ -46,15 +44,13 @@ public class DetailActivity extends AppCompatActivity {
             startActivity(new Intent(this, SettingsActivity.class));
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 
     public static class DetailActivityFragment extends Fragment {
 
-
         private static final String LOG_TAG = DetailActivityFragment.class.getSimpleName();
-        private static  final String FORECAST_SHARE_HASHTAG = "WeatherApp";
+        private static  final String FORECAST_SHARE_HASHTAG = " #WeatherApp";
         private String mForecastStr;
 
         public DetailActivityFragment() {
@@ -64,22 +60,14 @@ public class DetailActivity extends AppCompatActivity {
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
+            View rootView = inflater.inflate(R.layout.fragment_detail, container, false);
             Intent intent = getActivity().getIntent();
 
-            View rootView = inflater.inflate(R.layout.fragment_detail, container, false);
             if (intent != null && intent.hasExtra(Intent.EXTRA_TEXT) ) {
                 mForecastStr = intent.getStringExtra(Intent.EXTRA_TEXT);
                 ( (TextView) rootView.findViewById(R.id.detail_text)).setText(mForecastStr);
             }
             return rootView;
-        }
-
-        private Intent createShareForecastIntent(){
-            Intent shareIntent = new Intent(Intent.ACTION_SEND);
-            shareIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
-            shareIntent.setType("text/plain");
-            shareIntent.putExtra(Intent.EXTRA_TEXT,mForecastStr + FORECAST_SHARE_HASHTAG);
-            return shareIntent;
         }
 
         @Override
@@ -101,6 +89,14 @@ public class DetailActivity extends AppCompatActivity {
             } else {
                 Log.d(LOG_TAG, "Share Action Provider is null?");
             }
+        }
+        private Intent createShareForecastIntent(){
+            Intent shareIntent = new Intent(Intent.ACTION_SEND);
+            shareIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
+            shareIntent.setType("text/plain");
+            shareIntent.putExtra(Intent.EXTRA_TEXT,
+                    mForecastStr + FORECAST_SHARE_HASHTAG);
+            return shareIntent;
         }
     }
 }
