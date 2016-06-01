@@ -3,18 +3,18 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
         <item name="actionBarStyle">@style/ActionBar.Solid.Sunshine</item>
+        <item name="android:windowContentOverlay">@null</item>
+
     </style>
 
 
     <style name="ActionBar.Solid.Sunshine"
            parent="@style/Widget.AppCompat.Light.ActionBar.Solid.Inverse">
         <item name="android:background">@color/sunshine_blue</item>
-    </style>
+        <item name="logo">@drawable/ic_logo</item>
 
+    </style>
 
     <style name="ForecastTheme">
         <item name="actionBarStyle">@style/ActionBar.Solid.Sunshine.NoTitle</item>
@@ -25,11 +25,13 @@
            parent="@style/Widget.AppCompat.Light.ActionBar.Solid.Inverse">
         <item name="displayOptions">useLogo|showHome</item>
         <item name="logo">@drawable/ic_logo</item>
+
     </style>
     
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+
     </style>
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
@@ -42,8 +44,16 @@
 
     </style>
 
-    <!-- Settings activity theme. -->
     <style name="SettingsTheme" parent="AppTheme">
     </style>
+
+
+<style name="textview">
+    <item name="android:layout_width">fill_parent</item>
+    <item name="android:layout_height">28dp</item>
+    <item name="android:layout_gravity">center_horizontal|center_vertical</item>
+
+</style>
+
 
 </resources>

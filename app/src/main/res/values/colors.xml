@@ -4,13 +4,15 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
     <color name="grey">#cccccc</color>
-    <color name="sunshine_light_blue">#ff64c2f4</color>
+    <color name="sunshine_light_blue">#212121</color>
+    <color name="sunshine_light_blue1">#646464</color>
 
     <color name="white">#FFFFFF</color>
     <color name="grey_700">#646464</color>
     <color name="black">#000000</color>
 
-    <color name="sunshine_blue">#ff1ca8f4</color>
-    <color name="sunshine_dark_blue">#0288D1</color>
+    <color name="sunshine_blue">#313131</color>
+    <color name="sunshine_dark_blue">#646464</color>
+    <color name="background_material_dark_1">#292929</color>
 
 </resources>

@@ -10,16 +10,19 @@
         android:padding="16dp">
 
         <!-- Header: Day, Date -->
-        <TextView
+        <com.example.android.sunshine.MyCustomTextView
             android:id="@+id/detail_day_textview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textSize="24sp"
            />
 
-        <TextView
+        <com.example.android.sunshine.MyCustomTextView
             android:id="@+id/detail_date_textview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:textColor="#ffffff"
            />
 
         <!-- Main content: high, low, art, weather state -->
@@ -35,16 +38,18 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <TextView
+                <com.example.android.sunshine.MyCustomTextView
                     android:id="@+id/detail_high_textview"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textSize="96sp"
                     />
 
-                <TextView
+                <com.example.android.sunshine.MyCustomTextView
                     android:id="@+id/detail_low_textview"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textSize="48sp"
                      />
             </LinearLayout>
 
@@ -61,31 +66,52 @@
                     android:layout_height="wrap_content"
                     />
 
-                <TextView
+                <com.example.android.sunshine.MyCustomTextView
                     android:id="@+id/detail_forecast_textview"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textAppearance="?android:textAppearanceLarge"
                     />
             </LinearLayout>
         </LinearLayout>
 
         <!-- Humidity, wind, pressure -->
-        <TextView
+        <LinearLayout
+            android:layout_height="match_parent"
+            android:layout_marginRight="0dp"
+            android:layout_marginTop="16dp"
+            android:layout_width="match_parent"
+            android:orientation="vertical">
+
+
+        <com.example.android.sunshine.MyCustomTextView
             android:id="@+id/detail_humidity_textview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textAppearance="?android:textAppearanceLarge"
             />
 
-        <TextView
+        <com.example.android.sunshine.MyCustomTextView
             android:id="@+id/detail_wind_textview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textAppearance="?android:textAppearanceLarge"
            />
 
-        <TextView
+        <com.example.android.sunshine.MyCustomTextView
             android:id="@+id/detail_pressure_textview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textAppearance="?android:textAppearanceLarge"
              />
+
+            <com.example.android.sunshine.MyCustomTextView
+                android:id="@+id/detail_location_textview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:textAppearanceLarge"
+                />
+
+    </LinearLayout>
     </LinearLayout>
 </ScrollView>

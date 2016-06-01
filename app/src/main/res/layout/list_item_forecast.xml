@@ -8,30 +8,48 @@
               android:background="@drawable/touch_selector"
               android:orientation="horizontal">
 
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
     <ImageView
         android:id="@+id/list_item_icon"
              android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
+
+</FrameLayout>
 
     <LinearLayout
         android:layout_height="wrap_content"
         android:layout_width="0dp"
         android:layout_weight="1"
         android:orientation="vertical"
-        android:paddingLeft="16dp">
+        android:paddingLeft="1dp">
 
-    <TextView
+    <com.example.android.sunshine.MyCustomTextView
         android:id="@+id/list_item_date_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Tomorrow"/>
+        android:textColor="@color/white"
+        android:textAppearance="?android:textAppearanceLarge"
+       />
 
 
-    <TextView
+    <com.example.android.sunshine.MyCustomTextView
         android:id="@+id/list_item_forecast_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Clear"/>
+        android:textSize="12sp"
+    />
+
+        <com.example.android.sunshine.MyCustomTextView
+            android:id="@+id/detail_location_city_textview"
+            style="@style/textview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:textSize="0sp"
+            />
 
         </LinearLayout>
 
@@ -40,17 +58,19 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <TextView
+        <com.example.android.sunshine.MyCustomTextView
             android:id="@+id/list_item_high_textview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="81"/>
+            android:textAppearance="?android:textAppearanceLarge"
+          />
 
-        <TextView
+        <com.example.android.sunshine.MyCustomTextView
             android:id="@+id/list_item_low_textview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="60"/>
+            android:textAppearance="?android:textAppearanceSmall"
+            />
 
     </LinearLayout>
 
