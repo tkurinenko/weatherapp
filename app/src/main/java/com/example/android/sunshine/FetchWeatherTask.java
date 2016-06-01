@@ -5,7 +5,6 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.text.format.Time;
 import android.util.Log;
 
@@ -15,15 +14,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.Vector;
 
-public class FetchWeatherTask extends AsyncTask<String, Void, Void> {
+public class FetchWeatherTask {
 
     private final String LOG_TAG = FetchWeatherTask.class.getSimpleName();
 
@@ -78,6 +71,7 @@ public class FetchWeatherTask extends AsyncTask<String, Void, Void> {
         }
 
         locationCursor.close();
+        // Wait, that worked?  Yes!
         return locationId;
     }
 
@@ -88,6 +82,7 @@ public class FetchWeatherTask extends AsyncTask<String, Void, Void> {
      * Fortunately parsing is easy:  constructor takes the JSON string and converts it
      * into an Object hierarchy for us.
      */
+
 
     private void getWeatherDataFromJson(String forecastJsonStr,
                                         String locationSetting)
@@ -228,7 +223,7 @@ public class FetchWeatherTask extends AsyncTask<String, Void, Void> {
     }
 
 
-    @Override
+/*    @Override
     protected Void doInBackground(String... params) {
         // If there's no zip code, there's nothing to look up.  Verify size of params.
         if (params.length == 0) {
@@ -298,7 +293,7 @@ public class FetchWeatherTask extends AsyncTask<String, Void, Void> {
                 return null;
             }
             forecastJsonStr = buffer.toString();
-            getWeatherDataFromJson(forecastJsonStr, locationQuery);
+           // getWeatherDataFromJson(forecastJsonStr, locationQuery);
         } catch (IOException e) {
             Log.e(LOG_TAG, "Error ", e);
             // If the code didn't successfully get the weather data, there's no point in attempting
@@ -319,5 +314,5 @@ public class FetchWeatherTask extends AsyncTask<String, Void, Void> {
             }
         }
         return null;
-    }
+    }*/
 }
