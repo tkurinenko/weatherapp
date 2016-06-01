@@ -2,6 +2,7 @@ package com.example.android.sunshine;
 
 import android.content.Intent;
 import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
@@ -25,11 +26,16 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
 
     private static final String LOG_TAG = DetailActivityFragment.class.getSimpleName();
     private static final String FORECAST_SHARE_HASHTAG = " #WeatherApp";
+
     private static final String LOCATION_KEY = "location";
     private static final String FORECAST_KEY = "forecast";
     private static final int DETAIL_LOADER = 0;
+    static final String DETAIL_URI = "URI";
+
     private ShareActionProvider mShareActionProvider;
     private String mForecast;
+    private String mLocation;
+    private Uri mUri;
 
     private ImageView mIconView;
     private TextView mFriendlyDateView;
@@ -74,7 +80,12 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View rootView = inflater.inflate(R.layout.activity_detail, container, false);
+        Bundle arguments = getArguments();
+        if (arguments != null) {
+            mUri = arguments.getParcelable(DetailActivityFragment.DETAIL_URI);
+        }
+
+        View rootView = inflater.inflate(R.layout.fragment_detail, container, false);
         mIconView = (ImageView) rootView.findViewById(R.id.detail_icon);
         mDateView = (TextView) rootView.findViewById(R.id.detail_date_textview);
         mFriendlyDateView = (TextView) rootView.findViewById(R.id.detail_day_textview);
@@ -85,15 +96,7 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
         mWindView = (TextView) rootView.findViewById(R.id.detail_wind_textview);
         mPressureView = (TextView) rootView.findViewById(R.id.detail_pressure_textview);
         return rootView;
-
     }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        getLoaderManager().restartLoader(DETAIL_LOADER, null, this);
-    }
-
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
@@ -124,25 +127,38 @@ public class DetailActivityFragment extends Fragment implements LoaderManager.Lo
         return shareIntent;
     }
 
+    void onLocationChanged( String newLocation ) {
+        // replace the uri, since the location has changed
+        Uri uri = mUri;
+        if (null != uri) {
+            long date = WeatherContract.WeatherEntry.getDateFromUri(uri);
+            Uri updatedUri = WeatherContract.WeatherEntry.buildWeatherLocationWithDate(newLocation, date);
+            mUri = updatedUri;
+            getLoaderManager().restartLoader(DETAIL_LOADER, null, this);
+        }
+    }
+
 
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-        Log.v(LOG_TAG, "In onCreateLoader");
-        Intent intent = getActivity().getIntent();
-        if (intent == null) {
+       /* Intent intent = getActivity().getIntent();
+        if (intent == null || intent.getData() == null) {
             return null;
-        }
+        }*/
 
-        // Now create and return a CursorLoader that will take care of
-        // creating a Cursor for the data being displayed.
-        return new CursorLoader(
-                getActivity(),
-                intent.getData(),
-                FORECAST_COLUMNS,
-                null,
-                null,
-                null
-        );
+        if (null != mUri) {
+            // Now create and return a CursorLoader that will take care of
+            // creating a Cursor for the data being displayed.
+            return new CursorLoader(
+                    getActivity(),
+                    mUri,
+                    FORECAST_COLUMNS,
+                    null,
+                    null,
+                    null
+            );
+        }
+        return null;
     }
 
     @Override
